@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Terminbuchung</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        button {
+    padding: 7px;
+    background-color: #a82b2b!important;
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    width: 100%;
+}
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .message {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        /* #beraterSelection {
+            display: none;
+        }*/
+        #jabuchen,
+        #neinbuchen {
+            display: none;
+        }
+    </style>
+    <script>
+
+        function handleButtonClick(isJa) {
+            if (isJa) {
+                // Wenn der "Ja"-Button geklickt wird, rufe showBeraterSelection auf
+                showBeraterSelection();
+            } else {
+                // Wenn der "Nein"-Button geklickt wird, rufe cancelBooking auf
+                cancelBooking();
+            }
+        }
+
+        function showBeraterSelection() {
+
+            // Zeige die Berater-Auswahl und blende den "Nein"-Button aus
+            document.getElementById('btnNein').style.display = 'none';
+            document.getElementById('neinbtn').style.display = 'none';
+            document.getElementById('beraterSelection').style.display = 'block';
+
+            // Andernfalls, blende die Berater-Auswahl wieder aus
+
+
+        }
+
+        function cancelBooking() {
+            document.getElementById('btnNein').style.display = 'block';
+            document.getElementById('neinbtn').style.display = 'block';
+            document.getElementById('beraterSelection').style.display = 'none';
+            // Hier kannst du die Logik für das Abbrechen der Buchung hinzufügen
+
+        }
+
+
+        /*function confirmAppointment() {
+            var berater = document.getElementById('beraterList').value;
+            if (berater) {
+                // Zeigt die Bestätigungsmeldung und verbirgt die Buchungsoptionen
+                document.getElementById('confirmationMessage').style.display = 'block';
+                document.getElementById('beraterSelection').style.display = 'none';
+            } else {
+                alert("Bitte wählen Sie einen Berater.");
+            }
+        }*/
+
+        let alter = 27; // Beispiel: hier kannst du das Alter einstellen
+
+        if (alter >= 28) {
+            console.log("Du bist 28 Jahre alt oder älter.");
+            // Hier kannst du den Code hinzufügen, der ausgeführt werden soll, wenn du 28 oder älter bist.
+        } else {
+            console.log("Bitte kontaktieren Sie JMD.");
+            
+            // Hier kannst du den Code für den Fall einfügen, dass du unter 28 bist.
+        }
+
+        function zeigeButton(antwort) {
+          // Beide Buttons zu Beginn ausblenden
+          document.getElementById('beraterSelection').style.display = 'none';
+          document.getElementById('neinBtn').style.display = 'none';
+    
+          // Je nach Antwort den entsprechenden Button anzeigen
+          if (antwort === 'ja') {
+            document.getElementById('beraterSelection').style.display = 'inline-block';
+          } else if (antwort === 'nein') {
+            document.getElementById('neinBtn').style.display = 'inline-block';
+          }
+        }
+    </script>
+
+</head>
+
+<body>
+    
+    <div class="container">
+        <h2>Termin buchen</h2>
+        <form id="bookingForm" action="submit_termin.php" method="POST">
+            <div class="form-group">
+            
+                <select name="" id="">
+                    <option value="auswählen">-Bitte auswählen-</option>
+                        <option value="Mann">Mann </option>
+                        <option value="Frau">Frau</option>
+                        <option value="Divers">Divers</option>
+                    </select>
+            </div>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required placeholder="Ihr Name">
+            </div>
+
+            <div class="form-group">
+                <label for="email">E-Mail</label>
+                <input type="email" id="email" name="email" required placeholder="Ihre E-Mail-Adresse">
+            </div>
+            <div class="form-group">
+                <label>Waren sie schon bei uns?</label>
+
+                <button onclick="zeigeButton('ja')" style="width: 48%;">Ja</button>
+                <button onclick="zeigeButton('nein')" style="width: 48%;">Nein</button>
+                </div>
+
+
+                <div class="form-group" id="beraterSelection" style="display:none;">
+
+                    <h3>Wenn Ja Wählen Sie einen Berater:</h3>
+                    <select id="beraterList">
+                        <option value="berat1">Berater 1</option>
+                        <option value="berat2">Berater 2</option>
+                        <option value="berat3">Berater 3</option>
+                        <option value="berat1">Berater 4</option>
+                        <option value="berat2">Berater 5</option>
+                        <option value="berat3">Berater 6</option>
+                        <option value="berat1">Berater 7</option>
+                        <option value="berat2">Berater 8</option>
+                        <option value="berat3">Berater 9</option>
+                    </select>
+                </div>
+
+
+                <div id="neinBtn" style="display:none;">
+                    <div class="form-group">
+                       <!-- <h3> Wenn Nein bitte ausfüllen?</h3><br>-->
+                        <label for="nachricht">Seit wann sind sie in Deutschland?</label><br>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="alter">Ihr Alter</label>
+                        <select>
+                            <option value="ueber28">Sind sie über 28 Jahre alt?</option><br>
+                            <option value="28">Sind sie 28 Jahre alt</option>
+                            <option value="unter28">Sind sie unter 28 Jahre alt</option>
+                        </select>
+
+                    </div>
+                    <div class="form-group">
+                        <label>Sprechen sie Deutsch?
+                            <input type="checkbox" name="option" value="ja">Ja
+                            <input type="checkbox" name="option" value="nein">Nein
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>Welche Sprache</label>
+                        <input type="text"></input>
+                    </div>
+                    <div class="form-group"> <label for="stadt">Wo wohnen sie?</label>
+                        <br>
+                        <select>
+                            <optgroup label="Bayern">
+                                <option value="">Unterkunft</option>
+                                <option value="">Wohnung</option>
+                                <option value="">Pension</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="form-group"><label for="stadtMuenchen">Adresse</label><input type="text"
+                            for="LHM"></input>
+                    </div>
+                </div>
+
+                <label>Wann möchten sie ein Termin buchen</label>
+                <div class="form-group">
+                    <label for="date">Datum</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="time">Uhrzeit</label>
+                    <select id="time" name="time" required>
+                        <option value="">Wählen Sie eine Uhrzeit</option>
+                        <option value="08:00">08:00</option>
+                        <option value="08:30">08:30</option>
+                        <option value="09:00">09:00</option>
+                        <option value="09:30">09:30</option>
+                        <option value="10:00">10:00</option>
+                        <option value="10:30">10:30</option>
+                        <option value="11:00">11:00</option>
+                        <option value="11:30">11:30</option>
+                        <option value="12:00">12:00</option>
+                        <option value="12:30">12:30</option>
+                        <option value="13:00">13:00</option>
+                        <option value="13:30">13:30</option>
+                        <option value="14:00">14:00</option>
+                        <option value="14:30">14:30</option>
+                        <option value="15:00">15:00</option>
+                        <option value="15:30">15:30</option>
+                        <option value="16:00">16:00</option>
+                        <option value="16:30">16:30</option>
+                    </select>
+                </div>
+               
+        <label class="checkbox" >
+            <input type="checkbox" name="privacy" value="1" aria-invalid="false" style="width: 10px;">
+            Ich habe die Hinweise zum Datenschutz gelesen und erkläre mich mit ihnen einverstanden.
+            </label>
+            <label class="checkbox">
+                <input type="checkbox" name="marketing" value="1" aria-invalid="false" style="width: 10px;">
+                Ja, ich möchte E-Mails mit Business Tipps, Angeboten und Events von Belbo erhalten. Ich kann diese Einwilligung jederzeit widerrufen.
+                </label>
+    <button type="submit">Termin buchen</button>
+    <div id="confirmationMessage" class="message" style="display:none;">
+        Ihr Termin wurde erfolgreich gebucht!
+    </div>
+</form>
+
+</body>
+
+</html>
